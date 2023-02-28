@@ -3,18 +3,18 @@ import _ from "lodash";
 const formRef = document.querySelector(".feedback-form");
 const emailInputRef = document.querySelector('[name="email"]');
 const messageInputRef = document.querySelector('[name="message"]'); 
-
-let data;
+let DATA = JSON.parse(localStorage.getItem("feedback-form-state"));
 
 formRef.addEventListener('submit', onFormSubmit);
 formRef.addEventListener('input', _.throttle(onFormInput, 500));
 
 function onFormSubmit(event){
     event.preventDefault();
-    if (data){
-        console.log(data);
+    if (DATA && DATA.email && DATA.message){
+        console.log(DATA);
         localStorage.removeItem("feedback-form-state");
         formRef.reset();
+        DATA = null;
     }
 };
 
@@ -26,13 +26,13 @@ function onFormInput(){
         message,
     };
     localStorage.setItem("feedback-form-state", JSON.stringify(formElements));
-    data = JSON.parse(localStorage.getItem("feedback-form-state"));
 };
 
-function onFormUpload(){
-    if (data){
-        emailInputRef.value = data.email;
-        messageInputRef.value = data.message;
-    }
+if (DATA && DATA.email){
+    emailInputRef.value = DATA.email;
+    
 }
-onFormUpload()
+if (DATA && DATA.message) {
+    messageInputRef.value = DATA.message;
+}
+
