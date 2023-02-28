@@ -10,7 +10,7 @@ formRef.addEventListener('input', _.throttle(onFormInput, 500));
 
 function onFormSubmit(event){
     event.preventDefault();
-    if (DATA && DATA.email && DATA.message){
+    if (DATA){
         console.log(DATA);
         localStorage.removeItem("feedback-form-state");
         formRef.reset();
@@ -29,10 +29,8 @@ function onFormInput(){
     DATA = JSON.parse(localStorage.getItem("feedback-form-state"));
 };
 
-if (DATA && DATA.email){
+if (DATA){
     emailInputRef.value = DATA.email;
-}
-if (DATA && DATA.message) {
     messageInputRef.value = DATA.message;
 }
 
