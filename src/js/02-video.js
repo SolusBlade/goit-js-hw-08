@@ -8,7 +8,7 @@ let timeData = localStorage.getItem("videoplayer-current-time");
 player.on('timeupdate', _.throttle(onGetTime, 1000));
 
 function onGetTime(data) {
-    const timeData = Math.round(data.seconds);
+    timeData = Math.round(data.seconds);
     localStorage.setItem("videoplayer-current-time", timeData);
 };
 
