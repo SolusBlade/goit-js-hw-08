@@ -26,11 +26,11 @@ function onFormInput(){
         message,
     };
     localStorage.setItem("feedback-form-state", JSON.stringify(formElements));
+    DATA = JSON.parse(localStorage.getItem("feedback-form-state"));
 };
 
 if (DATA && DATA.email){
     emailInputRef.value = DATA.email;
-    
 }
 if (DATA && DATA.message) {
     messageInputRef.value = DATA.message;
